@@ -1,0 +1,16 @@
+import { defineConfig, devices } from "@playwright/test";
+
+export default defineConfig({
+  testDir: "./tests/e2e",
+  webServer: {
+    command:
+      "PATH=/Users/kanemac2/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH /Users/kanemac2/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/pnpm run dev",
+    url: "http://127.0.0.1:3000",
+    reuseExistingServer: true
+  },
+  use: {
+    baseURL: "http://127.0.0.1:3000",
+    trace: "on-first-retry"
+  },
+  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }]
+});

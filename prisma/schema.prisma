@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum QuestionType {
+  single_choice
+  multi_choice
+  numeric
+  text
+}
+
+enum QuestionStatus {
+  verified
+  needs_review
+}
+
+model Question {
+  id             String         @id @default(cuid())
+  source         String
+  questionNumber Int
+  prompt         String
+  imageUrl       String
+  type           QuestionType
+  options        Json
+  answer         Json
+  tolerance      Float?
+  unit           String?
+  explanation    String?
+  status         QuestionStatus @default(needs_review)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  attempts       Attempt[]
+
+  @@unique([source, questionNumber])
+  @@index([source])
+  @@index([status])
+}
+
+model Attempt {
+  id         String   @id @default(cuid())
+  questionId String
+  isCorrect  Boolean
+  createdAt  DateTime @default(now())
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([questionId])
+  @@index([createdAt])
+}

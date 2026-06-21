@@ -1,0 +1,763 @@
+[
+  {
+    "source": "tutorial_1",
+    "questionNumber": 1,
+    "prompt": "A cylinder is subject to applied torques as shown. In which segment(s) of this cylinder is the torque a maximum?\nA. A-B\nB. B-C\nC. C-D\nD. D-E\nE. E-F\nF. F-G",
+    "imageUrl": "/questions/tutorial-1-q01.png",
+    "type": "single_choice",
+    "options": [
+      "A-B",
+      "B-C",
+      "C-D",
+      "D-E",
+      "E-F",
+      "F-G"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_1",
+    "questionNumber": 2,
+    "prompt": "Stepped cylinder A-B-C-D has diameters and is axially loaded as shown. In units of MPa, what is the maximum normal stress in this stepped\ncylinder ?",
+    "imageUrl": "/questions/tutorial-1-q02.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_1",
+    "questionNumber": 3,
+    "prompt": "The strain on a member in a truss is measured and found to be ε = 30E-6 . The elongation was also measured and found to be δ = 0.09 mm.\nIn units of meters, what was the original length of this member ?",
+    "imageUrl": "/questions/tutorial-1-q03.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_1",
+    "questionNumber": 4,
+    "prompt": "Click or touch the point on this stress-strain diagram corresponding to the fracture stress.",
+    "imageUrl": "/questions/tutorial-1-q04.png",
+    "type": "text",
+    "options": [],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_1",
+    "questionNumber": 5,
+    "prompt": "What is represented by point A on the stress strain curve shown ?\nA. Ultimate Stress\nB. End of Elastic Region\nC. Fracture Stress\nD. Start of Necking\nE. Start of Strain Hardening",
+    "imageUrl": "/questions/tutorial-1-q05.png",
+    "type": "single_choice",
+    "options": [
+      "Ultimate Stress",
+      "End of Elastic Region",
+      "Fracture Stress",
+      "Start of Necking",
+      "Start of Strain Hardening"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_1",
+    "questionNumber": 6,
+    "prompt": "Consider a cylinder subject to axial loading. It is made out of aluminum (E = 70.2 Gpa) and when a load P = 8kN is applied, a strain gage\nmounted on its side registers an axial strain ε = 1.37 x 10-3.\nIn units of MPa, what is the average normal stress in the cylinder?",
+    "imageUrl": "/questions/tutorial-1-q06.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_1",
+    "questionNumber": 7,
+    "prompt": "A material sample was tested and found to have the stress-strain curve shown. A part to be designed with this material should have a factor of\nsafety F.S.= 6 (based on yield strength).\nIn units of MPa, what is the allowable stress (i.e. design stress) that should be used?",
+    "imageUrl": "/questions/tutorial-1-q07.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_1",
+    "questionNumber": 8,
+    "prompt": "A 1 m long uniform rectangular bar has a cross-section and properties as shown. When the bar is subject to a particular tensile load, the 250\nmm dimension shrinks by 0.001mm.\nBy how much (in mm) did the length increase?",
+    "imageUrl": "/questions/tutorial-1-q08.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_1",
+    "questionNumber": 9,
+    "prompt": "A bar is subjectd to an axial tensile stress of σ = 100 MPa. What is the normal stress on a plane inclined at θ = 45 ˙ to the axis of loading\nA. 100 MPa\nB. 50 MPa\nC. 70.7 MPa\nD. 25 MPa",
+    "imageUrl": "/questions/tutorial-1-q09.png",
+    "type": "single_choice",
+    "options": [
+      "100 MPa",
+      "50 MPa",
+      "70.7 MPa",
+      "25 MPa"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_1",
+    "questionNumber": 10,
+    "prompt": "A steel component is subjected to an actual working stress of 80 MPa. If the yield stress of the material is 320 MPa, what is the Factor of\nSafety (FS) based on yield?\nA. 2\nB. 4\nC. 3\nD. 6",
+    "imageUrl": "/questions/tutorial-1-q10.png",
+    "type": "single_choice",
+    "options": [
+      "2",
+      "4",
+      "3",
+      "6"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_1",
+    "questionNumber": 11,
+    "prompt": "In mechanical design of ductile materials, which definition of Factor of Safety is most commonly used and why?\nA. FS= UTS/Allowed stress, because UTS is always higher\nB. FS= Yield stress/ Allowed stress, because ductile materials fail by yielding, not fracture\nC. FS = Allowed stress/ yield stress , because we want to stay below yield.",
+    "imageUrl": "/questions/tutorial-1-q11.png",
+    "type": "single_choice",
+    "options": [
+      "FS= UTS/Allowed stress, because UTS is always higher",
+      "FS= Yield stress/ Allowed stress, because ductile materials fail by yielding, not fracture",
+      "FS = Allowed stress/ yield stress , because we want to stay below yield."
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_1",
+    "questionNumber": 12,
+    "prompt": "A flat metal bar of rectangular cross section is subjected to a tensile force of 6000N. The bar has a width of 20 mm and a thickness of 5 mm,\nand is loaded axially (along its length).\nConsider a plane inclined 30˙ to the normal plane (i.e., the plane perpendicular to the loading axis). This is equivalent to 60˙ to the loading\naxis.\nCalculate the shear stress τ in MPa on the inclined plane.",
+    "imageUrl": "/questions/tutorial-1-q12.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_2",
+    "questionNumber": 1,
+    "prompt": "Which of the listed choices (A - H) are used to develop the expression shown for delta, the deflection of a uniform, axially loaded member ?\n(Select all that are required)\nA. Hooke's Law\nB. Poisson's Ratio\nC. Definition of Normal Strain\nD. Coefficient of Thermal Expansion\nE. Definition of Normal Stress\nF. Definition of Shear Stress\nG. Principle of Superposition\nH. Strain Energy",
+    "imageUrl": "/questions/tutorial-2-q01.png",
+    "type": "multi_choice",
+    "options": [
+      "Hooke's Law",
+      "Poisson's Ratio",
+      "Definition of Normal Strain",
+      "Coefficient of Thermal Expansion",
+      "Definition of Normal Stress",
+      "Definition of Shear Stress",
+      "Principle of Superposition",
+      "Strain Energy"
+    ],
+    "answer": [
+      "A",
+      "C",
+      "E"
+    ],
+    "tolerance": null,
+    "unit": null,
+    "explanation": "The axial deformation expression follows from normal stress, normal strain, and Hooke's law.",
+    "status": "verified"
+  },
+  {
+    "source": "tutorial_2",
+    "questionNumber": 2,
+    "prompt": "A uniform aluminum rod ( E = 70 Gpa) has a cross-sectional area A = 300 square millimeters and a total length of 450 mm. It is subject to\naxial loads as shown.\nBy how much does the center section (B) deflect? Submit your answer in millimeters with a (+) for lengthening or a (-) for shortening.",
+    "imageUrl": "/questions/tutorial-2-q02.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_2",
+    "questionNumber": 3,
+    "prompt": "A rectangular bar is axially loaded in z direction with force P (N). The lateral dimensions a (mm) and b (mm) are along x and y directions. The\nmaterial is homogeneous and isotropic. Poisson's ratio ν is\nA. - ε /ε\nx y\nB. - ε /ε\ny x\nC. - ε / ε\nx z\nD. - ε / ε\ny z\nE. Both (a) and (b)\nF. Both (c) and (d)\nG. None",
+    "imageUrl": "/questions/tutorial-2-q03.png",
+    "type": "single_choice",
+    "options": [
+      "- ε /ε",
+      "- ε /ε",
+      "- ε / ε",
+      "- ε / ε",
+      "Both (a) and (b)",
+      "Both (c) and (d)",
+      "None"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_2",
+    "questionNumber": 4,
+    "prompt": "Poisson's ratio of Rubber is\nA. 0\nB. 0.2\nC. 0.32\nD. 0.5",
+    "imageUrl": "/questions/tutorial-2-q04.png",
+    "type": "single_choice",
+    "options": [
+      "0",
+      "0.2",
+      "0.32",
+      "0.5"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_2",
+    "questionNumber": 5,
+    "prompt": "If a cylindrical bar of length L and diameter D and an elastic modulus of E is axially loaded with a force P. The Poisson's ratio ν is given by\nA. δD /D\nB. - (δD/D) / E\nC. - (δD/D) / (P/AE)\nD. + (δD/D) / (σ/E)",
+    "imageUrl": "/questions/tutorial-2-q05.png",
+    "type": "single_choice",
+    "options": [
+      "δD /D",
+      "- (δD/D) / E",
+      "- (δD/D) / (P/AE)",
+      "+ (δD/D) / (σ/E)"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_2",
+    "questionNumber": 6,
+    "prompt": "For an axially loaded bar, the maximum shear stress is along the following planes\nA. planes perpendicular to the axial force\nB. Planes parallel to the axial force\nC. Places 45˙ to the axial force",
+    "imageUrl": "/questions/tutorial-2-q06.png",
+    "type": "single_choice",
+    "options": [
+      "planes perpendicular to the axial force",
+      "Planes parallel to the axial force",
+      "Places 45˙ to the axial force"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_2",
+    "questionNumber": 7,
+    "prompt": "We have a L=1m long cylindrical steel bar with diameter D= 10mm. The elastic modulus of steel is E=200 GPa and the Poisson's ratio is ν =\n0.32. If we apply a compressive axial force of P=5 kN, what is the change in diameter δD in mm?\nA. 0.00102 mm\nB. 4 mm\nC. 0.205 mm\nD. 0.04 mm",
+    "imageUrl": "/questions/tutorial-2-q07.png",
+    "type": "single_choice",
+    "options": [
+      "0.00102 mm",
+      "4 mm",
+      "0.205 mm",
+      "0.04 mm"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_2",
+    "questionNumber": 8,
+    "prompt": "A cylindrical bar of a metal alloy D= 20 mm, length L= 200 mm is deformed elastically in tension. The axial force is F = 50,000 N. Young's\nmodulus E= 70 GPa, Poisson's ratio ν =0.34.\nWhat is the change in length δL in millimetres?",
+    "imageUrl": "/questions/tutorial-2-q08.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_2",
+    "questionNumber": 9,
+    "prompt": "A cylindrical bar of a metal alloy D= 20 mm, length L= 200 mm is deformed elastically in tension. The axial force is F = 50,000 N. Young's modulus E= 70 GPa, Poisson's\nratio ν =0.34.\nWhat is the change in diameter δD in millimetres?\nNote: contraction is negative , extension is positive.",
+    "imageUrl": "/questions/tutorial-2-q09.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_2",
+    "questionNumber": 10,
+    "prompt": "A brittle material is under uniaxial tensile loading. A small elliptical surface crack is observed on one side of the specimen. Two important formulas are:\nStress concentration factor: K = σ / σ\nmax nominal\nGriffith's critical stress for crack propagation:\nσ = { 2 E γ /π a } 0.5\nc\nWhere the σ : critical stress for crack growth\nc\nE: Young's modulus\nγ : specific surface energy,\na : half crack length\nWhich of the following statement is most accurate?\nA. The stress concentration factor predicts the exact stress at which a crack will propagate in a brittle material\nB. Griffth's formula applies to ductile materials and considers plastic deformation near the crack tip.\nC. The presence of a a sharp crack increases the local stress, and if this exceeds the critical stress from the Griffith's formula, crack growth\noccurs.\nD. The nominal stress is always equal to the maximum stress near a crack tip.",
+    "imageUrl": "/questions/tutorial-2-q10.png",
+    "type": "single_choice",
+    "options": [
+      "The stress concentration factor predicts the exact stress at which a crack will propagate in a brittle material",
+      "Griffth's formula applies to ductile materials and considers plastic deformation near the crack tip.",
+      "The presence of a a sharp crack increases the local stress, and if this exceeds the critical stress from the Griffith's formula, crack growth",
+      "The nominal stress is always equal to the maximum stress near a crack tip."
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_3",
+    "questionNumber": 1,
+    "prompt": "A 10-mm square scribed on a large steel pressure vessel. After pressurization, a biaxial stress condition developed, with σ = 80 MPa\nx\nand σ = 40 MPa.\ny\nE=200 GPa, ν=0.3\nDetermine the change in x dimension δ in micrometers\nx",
+    "imageUrl": "/questions/tutorial-3-q01.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_3",
+    "questionNumber": 2,
+    "prompt": "What does Polar Moment of Inertia (denoted by J) physicall represent in torsion?\nA. The resistance of a material to axial loading\nB. The resistance of a shaft to bending deformation\nC. The resistance of a shaft's cross section to twisting under applied torque\nD. The energy stored in a shaft during elastic deformation",
+    "imageUrl": "/questions/tutorial-3-q02.png",
+    "type": "single_choice",
+    "options": [
+      "The resistance of a material to axial loading",
+      "The resistance of a shaft to bending deformation",
+      "The resistance of a shaft's cross section to twisting under applied torque",
+      "The energy stored in a shaft during elastic deformation"
+    ],
+    "answer": "C",
+    "tolerance": null,
+    "unit": null,
+    "explanation": "The polar moment of inertia is the cross section's geometric resistance to twisting under applied torque.",
+    "status": "verified"
+  },
+  {
+    "source": "tutorial_3",
+    "questionNumber": 3,
+    "prompt": "The angle of twist ϕ (in radians) for a cylindrical shaft of length L, under torque T, is given by\nA. TL/JG\nB. MC/I\nC. VQ/It\nD. PL/AE\nE. Tc/J",
+    "imageUrl": "/questions/tutorial-3-q03.png",
+    "type": "single_choice",
+    "options": [
+      "TL/JG",
+      "MC/I",
+      "VQ/It",
+      "PL/AE",
+      "Tc/J"
+    ],
+    "answer": "A",
+    "tolerance": null,
+    "unit": null,
+    "explanation": "For a circular shaft in torsion, the angle of twist is phi = TL/JG.",
+    "status": "verified"
+  },
+  {
+    "source": "tutorial_3",
+    "questionNumber": 4,
+    "prompt": "In the elastic torsion equation Tc/J, what does the symbol J stand for?\nA. Young's modulus\nB. Moment of Inertia about the neutral axis\nC. Polar Moment of Inertia\nD. Poisson's ratio",
+    "imageUrl": "/questions/tutorial-3-q04.png",
+    "type": "single_choice",
+    "options": [
+      "Young's modulus",
+      "Moment of Inertia about the neutral axis",
+      "Polar Moment of Inertia",
+      "Poisson's ratio"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_3",
+    "questionNumber": 5,
+    "prompt": "We have a brittle cyclindrical shaft, subjected to equal and opposite torques along opposite ends. The brittle fracture will occur along the\nfollowing plane :\nA. Perpendicular to the axis of the shaft\nB. parallel to the axis of the shaft\nC. along a plane 45˙ to the axis of the shaft",
+    "imageUrl": "/questions/tutorial-3-q05.png",
+    "type": "single_choice",
+    "options": [
+      "Perpendicular to the axis of the shaft",
+      "parallel to the axis of the shaft",
+      "along a plane 45˙ to the axis of the shaft"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_3",
+    "questionNumber": 6,
+    "prompt": "A cylinder of radius r = 10 cm is subject to a torque T. At what radius in the shaft will the shear stress due to torsion be 75% of the maximum\nstress due to torsion ? (Submit your answer in units of cm.)",
+    "imageUrl": "/questions/tutorial-3-q06.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_3",
+    "questionNumber": 7,
+    "prompt": "A shaft reaches its stress limit when the applied torque is 100 N-m. If this shaft is to be used to transfer 10 kW of power, at what speed must it\nrotate in rpm ?",
+    "imageUrl": "/questions/tutorial-3-q07.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_3",
+    "questionNumber": 8,
+    "prompt": "Consider a uniform cylinder with torques applied as shown. With respect to the left end, i.e. deflection at left end is zero, at which point (B, C,\nor D,) will the deflection of this member be the greatest ?\nA. A\nB. B\nC. C\nD. D",
+    "imageUrl": "/questions/tutorial-3-q08.png",
+    "type": "single_choice",
+    "options": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_3",
+    "questionNumber": 9,
+    "prompt": "Determine the deflection φ (in radians) over the length of the cylinder when it is subject to a torque T = 750 N-m. The cylinder has properties\nas listed with the figure.",
+    "imageUrl": "/questions/tutorial-3-q09.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_3",
+    "questionNumber": 10,
+    "prompt": "We have steel metal shafts with the same E and same length L and same cross sectional area, A. However, one of the shafts is hollow.\nWhich shaft would experience a larger angle of twist for the same applied torque T? Choose one of the answers but be prepared to prove your\nanswer mathematically.\nA. Solid shaft\nB. Hollow shaft",
+    "imageUrl": "/questions/tutorial-3-q10.png",
+    "type": "single_choice",
+    "options": [
+      "Solid shaft",
+      "Hollow shaft"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 1,
+    "prompt": "Determine the moment reaction in kN.m at the support for the cantilever beam shown.",
+    "imageUrl": "/questions/tutorial-4-q01.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 2,
+    "prompt": "Determine the support reaction at A in kN, include the positive or negative sign to indicate direction of the force.",
+    "imageUrl": "/questions/tutorial-4-q02.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 3,
+    "prompt": "Plot the shear diagram for the beam shown and determine the maximum value for shear in kN, and include signs in your answer.",
+    "imageUrl": "/questions/tutorial-4-q03.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 4,
+    "prompt": "Plot the Shear and Moment diagram for the beam shown and determine the maximum value for the moment in kN.m, include signs in your\nanswer.",
+    "imageUrl": "/questions/tutorial-4-q04.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 5,
+    "prompt": "Determine the reaction force at the support.\nA. P\nB. 2P\nC. -P\nD. -2P\nE. 0",
+    "imageUrl": "/questions/tutorial-4-q05.png",
+    "type": "single_choice",
+    "options": [
+      "P",
+      "2P",
+      "-P",
+      "-2P",
+      "0"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 6,
+    "prompt": "Determine the moment reaction at the support\nA. +3PL\nB. -2PL\nC. -PL\nD. +2PL\nE. +PL",
+    "imageUrl": "/questions/tutorial-4-q06.png",
+    "type": "single_choice",
+    "options": [
+      "+3PL",
+      "-2PL",
+      "-PL",
+      "+2PL",
+      "+PL"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 7,
+    "prompt": "Draw the shear and moment diagram for the cantilever beam and read the maximum shear force within the beam, make sure to include\nsigns.",
+    "imageUrl": "/questions/tutorial-4-q07.png",
+    "type": "text",
+    "options": [],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 8,
+    "prompt": "A simply supported beam of length 4 m has a 20 kN point load in the centre. What is the reaction force at each support?\nA. 2.5 kN\nB. 5.0 kN\nC. 10 kN\nD. 20 kN",
+    "imageUrl": "/questions/tutorial-4-q08.png",
+    "type": "single_choice",
+    "options": [
+      "2.5 kN",
+      "5.0 kN",
+      "10 kN",
+      "20 kN"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 9,
+    "prompt": "A simply supported beam of length 4 m has a point load in the centre. What is the maximum bending moment in the beam?\nA. 5 kN.m\nB. 10 kN.m\nC. 20 kN.m\nD. 2.5 kN.m",
+    "imageUrl": "/questions/tutorial-4-q09.png",
+    "type": "single_choice",
+    "options": [
+      "5 kN.m",
+      "10 kN.m",
+      "20 kN.m",
+      "2.5 kN.m"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 10,
+    "prompt": "A cantilever beam of 2 m length has a 5 kN downward force at its free end. What is the shear force along the length of the beam?\nA. V=0 kN\nB. V=2.5 kN\nC. V= 5kN\nD. V varies linearly from 0 to 5 kN",
+    "imageUrl": "/questions/tutorial-4-q10.png",
+    "type": "single_choice",
+    "options": [
+      "V=0 kN",
+      "V=2.5 kN",
+      "V= 5kN",
+      "V varies linearly from 0 to 5 kN"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 11,
+    "prompt": "A simply supported beam of length L=6 m, carries a uniformly distributed loading (UDL) ω = 2 kN/m. What is the maximum bending moment\nin the beam?\nA. 6 kN.m\nB. 9 kN.m\nC. 12 kN.m\nD. 18 kN.m",
+    "imageUrl": "/questions/tutorial-4-q11.png",
+    "type": "single_choice",
+    "options": [
+      "6 kN.m",
+      "9 kN.m",
+      "12 kN.m",
+      "18 kN.m"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 12,
+    "prompt": "A rectangular beam with cross sectional dimensions, 40 mm wide and 80 mm tall is subjected to a bending moment of 2 kN.m. What is the\nmaximum bending stress in the beam?\nA. 12 kN.m\nB. 24 kN.m\nC. 47 kN.m\nD. 60 kN.m",
+    "imageUrl": "/questions/tutorial-4-q12.png",
+    "type": "single_choice",
+    "options": [
+      "12 kN.m",
+      "24 kN.m",
+      "47 kN.m",
+      "60 kN.m"
+    ],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 13,
+    "prompt": "Consider the beam loaded as shown and its cross-section. Using your pointing device place an asterisk (*) at the point on the cross-section\nwhere the maximum compressive normal stress due to bending will occur.",
+    "imageUrl": "/questions/tutorial-4-q13.png",
+    "type": "text",
+    "options": [],
+    "answer": null,
+    "tolerance": null,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 14,
+    "prompt": "In units of MPa, what is the maximum compressive normal stress due to bending at a point 1.2 m from the left end of this beam (location C ) ?",
+    "imageUrl": "/questions/tutorial-4-q14.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 15,
+    "prompt": "An I-beam has the following dimensions:\nFlange width: 100mm\nFlange thickness: 10 mm\nWeb height (between flanges) : 80 mm\nWeb thickness: 10 mm.\nThe beam is made of streel and is subjected to a bending moment M= 5 kN.m acting about the centroidal axis (i.e., causing tension at the\nbottom and compression at the top).\nDetermine the moment of inertia of the cross-section about the horizontal centroidal axis I in mm4.\nxx",
+    "imageUrl": "/questions/tutorial-4-q15.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  },
+  {
+    "source": "tutorial_4",
+    "questionNumber": 16,
+    "prompt": "An I-beam has the following dimensions:\nFlange width: 100mm\nFlange thickness: 10 mm\nWeb height (between flanges) : 80 mm\nWeb thickness: 10 mm.\nThe beam is made of streel and is subjected to a bending moment M= 5 kN.m acting about the centroidal axis (i.e., causing tension at the bottom and compression at the top).\nYou already determined the moment of inertia of the cross-section about the horizontal centroidal axis I in mm4 . Now determine the maximum bending stress in the beam in\nxx\nMPa.",
+    "imageUrl": "/questions/tutorial-4-q16.png",
+    "type": "numeric",
+    "options": [],
+    "answer": null,
+    "tolerance": 0.01,
+    "unit": null,
+    "explanation": "Answer requires verification from the question image.",
+    "status": "needs_review"
+  }
+]
