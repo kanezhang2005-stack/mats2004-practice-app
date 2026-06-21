@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildQuestionLabels, summarizeAttempts } from "@/lib/stats";
+import { buildQuestionLabels, summarizeAttempts, summarizeClearedAttempts } from "@/lib/stats";
 
 describe("summarizeAttempts", () => {
   it("computes attempts, correct count, and rate per question", () => {
@@ -29,6 +29,16 @@ describe("buildQuestionLabels", () => {
     ).toEqual({
       cmqnr5vn80000kr7lauthmu2b: "Tutorial 1 Q1",
       cmqnr5vpg000ckr7l0wmgmok3: "Tutorial 3 Q12"
+    });
+  });
+});
+
+describe("summarizeClearedAttempts", () => {
+  it("returns a reset stats payload after clearing history", () => {
+    expect(summarizeClearedAttempts()).toEqual({
+      overall: { attempts: 0, correct: 0, correctRate: 0 },
+      byQuestion: {},
+      questionLabels: {}
     });
   });
 });

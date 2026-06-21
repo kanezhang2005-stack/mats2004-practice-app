@@ -10,11 +10,30 @@ type Stats = {
 
 export function AdminStats() {
   const [stats, setStats] = useState<Stats | null>(null);
+  const [clearConfirmation, setClearConfirmation] = useState("");
+  const [message, setMessage] = useState("");
 
   async function loadStats() {
     const response = await fetch("/api/admin/stats");
     if (response.ok) {
       setStats(await response.json());
+      setMessage("");
+    }
+  }
+
+  async function clearHistory() {
+    if (clearConfirmation !== "CLEAR") {
+      setMessage("Type CLEAR to confirm before clearing history.");
+      return;
+    }
+
+    const response = await fetch("/api/admin/stats", { method: "DELETE" });
+    if (response.ok) {
+      setStats(await response.json());
+      setClearConfirmation("");
+      setMessage("Answer history cleared.");
+    } else {
+      setMessage("Clear failed.");
     }
   }
 
@@ -24,6 +43,18 @@ export function AdminStats() {
       <button type="button" onClick={loadStats}>
         Load stats
       </button>
+      <label>
+        Type CLEAR to confirm
+        <input
+          aria-label="Type CLEAR to confirm"
+          value={clearConfirmation}
+          onChange={(event) => setClearConfirmation(event.target.value)}
+        />
+      </label>
+      <button type="button" onClick={clearHistory}>
+        Clear answer history
+      </button>
+      {message && <p>{message}</p>}
       {stats && (
         <>
           <p>Total attempts: {stats.overall.attempts}</p>

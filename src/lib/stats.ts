@@ -57,10 +57,23 @@ export function summarizeAttempts(attempts: AttemptLike[]) {
   return { overall, byQuestion };
 }
 
+export function summarizeClearedAttempts() {
+  return {
+    overall: { attempts: 0, correct: 0, correctRate: 0 },
+    byQuestion: {},
+    questionLabels: {}
+  };
+}
+
 export async function recordAttempt(questionId: string, isCorrect: boolean) {
   return prisma.attempt.create({
     data: { questionId, isCorrect }
   });
+}
+
+export async function clearAttemptHistory() {
+  await prisma.attempt.deleteMany();
+  return summarizeClearedAttempts();
 }
 
 export async function getAggregateStats() {
