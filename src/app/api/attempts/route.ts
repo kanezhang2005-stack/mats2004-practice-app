@@ -78,6 +78,15 @@ export async function POST(request: Request) {
     where: { id: body.questionId }
   });
 
+  if (question.answer === null) {
+    return NextResponse.json({
+      correct: false,
+      answer: question.answer,
+      explanation: question.explanation,
+      status: question.status
+    });
+  }
+
   const result = checkAnswer(toAnswerKey(question), body.submission);
 
   await recordAttempt(question.id, result.correct);
