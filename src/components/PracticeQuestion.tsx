@@ -35,8 +35,18 @@ export function PracticeQuestion({
 
   async function check() {
     setChecking(true);
-    setResult(await onCheck(question.id, submission));
-    setChecking(false);
+    try {
+      setResult(await onCheck(question.id, submission));
+    } catch {
+      setResult({
+        correct: false,
+        answer: null,
+        explanation: "Could not check this answer. Please try again.",
+        status: "needs_review"
+      });
+    } finally {
+      setChecking(false);
+    }
   }
 
   function toggleChoice(choice: string) {

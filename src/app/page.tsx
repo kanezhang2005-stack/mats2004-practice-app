@@ -1,14 +1,26 @@
 import { PracticeQuestion } from "@/components/PracticeQuestion";
 import { listPublicQuestions } from "@/lib/questions";
+import { headers } from "next/headers";
 
 async function checkAnswer(questionId: string, submission: string | string[]) {
   "use server";
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://127.0.0.1:3000";
+  const requestHeaders = await headers();
+  const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "127.0.0.1:3000";
+  const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.startsWith("127.0.0.1") ? "http" : "https");
+  const baseUrl = `${protocol}://${host}`;
   const response = await fetch(`${baseUrl}/api/attempts`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ questionId, submission })
   });
+  if (!response.ok) {
+    return {
+      correct: false,
+      answer: null,
+      explanation: "Could not check this answer. Please try again.",
+      status: "needs_review" as const
+    };
+  }
   return response.json();
 }
 
