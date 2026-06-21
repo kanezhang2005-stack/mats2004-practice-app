@@ -5,6 +5,7 @@ import React, { useState } from "react";
 type Stats = {
   overall: { attempts: number; correct: number; correctRate: number };
   byQuestion: Record<string, { attempts: number; correct: number; correctRate: number }>;
+  questionLabels?: Record<string, string>;
 };
 
 export function AdminStats() {
@@ -30,7 +31,7 @@ export function AdminStats() {
           <table>
             <thead>
               <tr>
-                <th>Question ID</th>
+                <th>Question</th>
                 <th>Attempts</th>
                 <th>Correct</th>
                 <th>Rate</th>
@@ -39,7 +40,7 @@ export function AdminStats() {
             <tbody>
               {Object.entries(stats.byQuestion).map(([questionId, stat]) => (
                 <tr key={questionId}>
-                  <td>{questionId}</td>
+                  <td>{stats.questionLabels?.[questionId] ?? questionId}</td>
                   <td>{stat.attempts}</td>
                   <td>{stat.correct}</td>
                   <td>{(stat.correctRate * 100).toFixed(1)}%</td>

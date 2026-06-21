@@ -11,6 +11,29 @@ type Stat = {
   correctRate: number;
 };
 
+type QuestionLabelSource = {
+  id: string;
+  source: string;
+  questionNumber: number;
+};
+
+export function formatQuestionSource(source: string) {
+  return source
+    .split("_")
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+export function buildQuestionLabels(questions: QuestionLabelSource[]) {
+  return Object.fromEntries(
+    questions.map((question) => [
+      question.id,
+      `${formatQuestionSource(question.source)} Q${question.questionNumber}`
+    ])
+  );
+}
+
 export function summarizeAttempts(attempts: AttemptLike[]) {
   const byQuestion: Record<string, Stat> = {};
   const overall: Stat = { attempts: 0, correct: 0, correctRate: 0 };
@@ -44,5 +67,16 @@ export async function getAggregateStats() {
   const attempts = await prisma.attempt.findMany({
     select: { questionId: true, isCorrect: true }
   });
-  return summarizeAttempts(attempts);
+  const summary = summarizeAttempts(attempts);
+  const questionIds = Object.keys(summary.byQuestion);
+  const questions = questionIds.length
+    ? await prisma.question.findMany({
+        where: { id: { in: questionIds } },
+        select: { id: true, source: true, questionNumber: true }
+      })
+    : [];
+  return {
+    ...summary,
+    questionLabels: buildQuestionLabels(questions)
+  };
 }
