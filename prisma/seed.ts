@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { Prisma } from "@prisma/client";
 import { prisma } from "../src/lib/db";
+import { buildSeedUpdateData } from "../src/lib/seed-policy";
 
 type SeedQuestion = {
   source: string;
@@ -21,6 +22,14 @@ function toPrismaJson(value: unknown): Prisma.InputJsonValue | typeof Prisma.Jso
   return value === null ? Prisma.JsonNull : (value as Prisma.InputJsonValue);
 }
 
+function toPrismaUpdateData(question: SeedQuestion) {
+  const updateData = buildSeedUpdateData(question);
+  return {
+    ...updateData,
+    options: toPrismaJson(updateData.options)
+  };
+}
+
 async function main() {
   const seedPath = path.join(process.cwd(), "data", "questions.seed.json");
   const raw = await fs.readFile(seedPath, "utf8");
@@ -34,17 +43,7 @@ async function main() {
           questionNumber: question.questionNumber
         }
       },
-      update: {
-        prompt: question.prompt,
-        imageUrl: question.imageUrl,
-        type: question.type,
-        options: toPrismaJson(question.options),
-        answer: toPrismaJson(question.answer),
-        tolerance: question.tolerance,
-        unit: question.unit,
-        explanation: question.explanation,
-        status: question.status
-      },
+      update: toPrismaUpdateData(question),
       create: {
         ...question,
         options: toPrismaJson(question.options),
