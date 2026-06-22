@@ -45,10 +45,15 @@ export function PracticeQuestion({
   const [submission, setSubmission] = useState<string | string[]>("");
   const [result, setResult] = useState<CheckResponse | null>(null);
   const [checking, setChecking] = useState(false);
+  const [explaining, setExplaining] = useState(false);
+  const [aiExplanation, setAiExplanation] = useState("");
+  const [aiError, setAiError] = useState("");
   const options = Array.isArray(question.options) ? question.options.map(String) : [];
 
   async function check() {
     setChecking(true);
+    setAiExplanation("");
+    setAiError("");
     try {
       setResult(await onCheck(question.id, submission));
     } catch {
@@ -60,6 +65,27 @@ export function PracticeQuestion({
       });
     } finally {
       setChecking(false);
+    }
+  }
+
+  async function explain() {
+    setExplaining(true);
+    setAiError("");
+    try {
+      const response = await fetch("/api/ai/explain", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ questionId: question.id, submission })
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error ?? "Could not generate an explanation.");
+      }
+      setAiExplanation(data.explanation);
+    } catch (error) {
+      setAiError(error instanceof Error ? error.message : "Could not generate an explanation.");
+    } finally {
+      setExplaining(false);
     }
   }
 
@@ -124,7 +150,24 @@ export function PracticeQuestion({
           {revealAnswer && <p>Standard answer: {JSON.stringify(result.answer)}</p>}
           {revealAnswer && result.status === "needs_review" && <p>This answer is pending verification.</p>}
           {revealAnswer && result.explanation && <p>{result.explanation}</p>}
+          {revealAnswer && !result.correct && (
+            <button className="secondary-button" type="button" onClick={explain} disabled={explaining}>
+              {explaining ? "Generating explanation" : "Explain"}
+            </button>
+          )}
+          {aiError && <p>{aiError}</p>}
         </section>
+      )}
+      {aiExplanation && (
+        <div className="modal-backdrop" role="dialog" aria-modal="true" aria-label="AI Explanation">
+          <section className="modal-panel">
+            <h3>AI Explanation</h3>
+            <div className="ai-explanation">{aiExplanation}</div>
+            <button className="primary-button" type="button" onClick={() => setAiExplanation("")}>
+              Close
+            </button>
+          </section>
+        </div>
       )}
     </article>
   );
