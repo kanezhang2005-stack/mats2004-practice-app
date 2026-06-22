@@ -1,4 +1,4 @@
-import { PracticeQuestion } from "@/components/PracticeQuestion";
+import { PracticeSession } from "@/components/PracticeSession";
 import { listPublicQuestions } from "@/lib/questions";
 import { headers } from "next/headers";
 
@@ -31,7 +31,6 @@ function shuffle<T>(items: T[]) {
 export default async function Home({ searchParams }: { searchParams: Promise<{ source?: string }> }) {
   const params = await searchParams;
   const questions = shuffle(await listPublicQuestions(params.source));
-  const firstQuestion = questions[0];
 
   return (
     <main className="app-shell">
@@ -51,8 +50,8 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ s
           <button type="submit">Filter</button>
         </form>
       </header>
-      {firstQuestion ? (
-        <PracticeQuestion question={firstQuestion} onCheck={checkAnswer} />
+      {questions.length ? (
+        <PracticeSession questions={questions} onCheck={checkAnswer} />
       ) : (
         <p>No questions found.</p>
       )}

@@ -134,7 +134,7 @@ export function AdminQuestionEditor() {
             Options JSON
             <textarea value={JSON.stringify(selected.options, null, 2)} onChange={(event) => setSelected({ ...selected, options: parseJsonOrString(event.target.value) })} />
           </label>
-          {selected.type === "numeric" ? (
+          {selected.type === "numeric" || selected.type === "text" ? (
             <label>
               Answer
               <input

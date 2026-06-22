@@ -21,6 +21,10 @@ function normalizeText(value: string): string {
   return value.trim().replace(/\s+/g, " ").toLowerCase();
 }
 
+function compactText(value: string): string {
+  return normalizeText(value).replace(/\s+/g, "");
+}
+
 function asString(value: Submission): string {
   return Array.isArray(value) ? value.join(",") : String(value);
 }
@@ -89,8 +93,9 @@ export function checkAnswer(key: AnswerKey, submission: Submission): CheckResult
   }
 
   const normalizedSubmission = normalizeText(asString(submission));
+  const normalizedAnswer = normalizeText(key.answer);
   return {
-    correct: normalizedSubmission === normalizeText(key.answer),
+    correct: normalizedSubmission === normalizedAnswer || compactText(normalizedSubmission) === compactText(normalizedAnswer),
     normalizedSubmission
   };
 }

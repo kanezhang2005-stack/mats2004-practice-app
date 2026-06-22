@@ -23,10 +23,12 @@ type CheckResponse = {
 
 export function PracticeQuestion({
   question,
-  onCheck
+  onCheck,
+  revealAnswer = true
 }: {
   question: PracticeQuestionData;
   onCheck: (questionId: string, submission: string | string[]) => Promise<CheckResponse>;
+  revealAnswer?: boolean;
 }) {
   const [submission, setSubmission] = useState<string | string[]>("");
   const [result, setResult] = useState<CheckResponse | null>(null);
@@ -107,9 +109,9 @@ export function PracticeQuestion({
       {result && (
         <section className={result.correct ? "result result-correct" : "result result-wrong"}>
           <strong>{result.correct ? "Correct" : "Incorrect"}</strong>
-          <p>Standard answer: {JSON.stringify(result.answer)}</p>
-          {result.status === "needs_review" && <p>This answer is pending verification.</p>}
-          {result.explanation && <p>{result.explanation}</p>}
+          {revealAnswer && <p>Standard answer: {JSON.stringify(result.answer)}</p>}
+          {revealAnswer && result.status === "needs_review" && <p>This answer is pending verification.</p>}
+          {revealAnswer && result.explanation && <p>{result.explanation}</p>}
         </section>
       )}
     </article>

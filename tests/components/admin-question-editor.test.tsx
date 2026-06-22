@@ -19,6 +19,14 @@ const numericQuestion = {
   status: "verified" as const
 };
 
+const textQuestion = {
+  ...numericQuestion,
+  id: "q2",
+  questionNumber: 3,
+  type: "text" as const,
+  answer: "2P"
+};
+
 describe("AdminQuestionEditor", () => {
   afterEach(() => {
     vi.restoreAllMocks();
@@ -47,5 +55,32 @@ describe("AdminQuestionEditor", () => {
     await user.type(answerInput, "222.");
 
     expect(answerInput).toHaveValue("222.");
+  });
+
+  it("lets text answers be edited without JSON quotes", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockResolvedValueOnce({ ok: true })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ questions: [textQuestion] })
+        })
+    );
+
+    const user = userEvent.setup();
+    render(<AdminQuestionEditor />);
+
+    await user.type(screen.getByLabelText(/admin password/i), "secret");
+    await user.click(screen.getByRole("button", { name: /enter/i }));
+
+    const answerInput = await screen.findByLabelText(/answer/i);
+    expect(answerInput).toHaveValue("2P");
+
+    await user.clear(answerInput);
+    await user.type(answerInput, "P/2");
+
+    expect(answerInput).toHaveValue("P/2");
   });
 });

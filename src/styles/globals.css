@@ -59,6 +59,34 @@ button {
   padding: 20px;
 }
 
+.practice-session {
+  display: grid;
+  gap: 12px;
+}
+
+.session-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.session-controls label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.session-controls button,
+.session-controls select {
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: white;
+  padding: 6px 10px;
+}
+
 .question-shell h2 {
   font-size: clamp(1.2rem, 2vw, 1.6rem);
   line-height: 1.35;

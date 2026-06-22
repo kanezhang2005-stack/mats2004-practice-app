@@ -67,4 +67,11 @@ describe("checkAnswer", () => {
       normalizedSubmission: "a-b and c-d"
     });
   });
+
+  it("checks short text formulas without depending on spaces", () => {
+    expect(checkAnswer({ type: "text", answer: "2P" }, "2 P")).toEqual({
+      correct: true,
+      normalizedSubmission: "2 p"
+    });
+  });
 });
