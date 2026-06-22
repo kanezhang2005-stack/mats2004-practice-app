@@ -12,10 +12,12 @@ type CheckResponse = {
 
 export function PracticeSession({
   questions,
-  onCheck
+  onCheck,
+  aiExplanationsEnabled = true
 }: {
   questions: PracticeQuestionData[];
   onCheck: (questionId: string, submission: string | string[]) => Promise<CheckResponse>;
+  aiExplanationsEnabled?: boolean;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [mode, setMode] = useState<"practice" | "exam">("practice");
@@ -56,6 +58,7 @@ export function PracticeSession({
         question={currentQuestion}
         onCheck={onCheck}
         revealAnswer={mode === "practice"}
+        aiExplanationsEnabled={aiExplanationsEnabled}
       />
     </section>
   );

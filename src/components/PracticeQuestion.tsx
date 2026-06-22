@@ -53,11 +53,13 @@ function formatAiExplanation(text: string) {
 export function PracticeQuestion({
   question,
   onCheck,
-  revealAnswer = true
+  revealAnswer = true,
+  aiExplanationsEnabled = true
 }: {
   question: PracticeQuestionData;
   onCheck: (questionId: string, submission: string | string[]) => Promise<CheckResponse>;
   revealAnswer?: boolean;
+  aiExplanationsEnabled?: boolean;
 }) {
   const [submission, setSubmission] = useState<string | string[]>("");
   const [result, setResult] = useState<CheckResponse | null>(null);
@@ -167,7 +169,7 @@ export function PracticeQuestion({
           {revealAnswer && <p>Standard answer: {JSON.stringify(result.answer)}</p>}
           {revealAnswer && result.status === "needs_review" && <p>This answer is pending verification.</p>}
           {revealAnswer && result.explanation && <p>{result.explanation}</p>}
-          {revealAnswer && !result.correct && (
+          {revealAnswer && aiExplanationsEnabled && !result.correct && (
             <button className="secondary-button" type="button" onClick={explain} disabled={explaining}>
               {explaining ? "Generating explanation" : "Explain"}
             </button>

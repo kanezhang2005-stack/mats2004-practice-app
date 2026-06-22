@@ -14,6 +14,7 @@ type AdminQuestion = {
   tolerance: number | null;
   unit: string | null;
   explanation: string | null;
+  aiExplanation: string | null;
   status: "verified" | "needs_review";
 };
 
@@ -94,6 +95,15 @@ export function AdminQuestionEditor() {
     setMessage(response.ok ? "Deleted" : "Delete failed");
     if (response.ok) {
       setSelected(null);
+      await loadQuestions();
+    }
+  }
+
+  async function clearAiExplanation() {
+    if (!selected) return;
+    const response = await fetch(`/api/admin/questions/${selected.id}/ai-explanation`, { method: "DELETE" });
+    setMessage(response.ok ? "AI cache cleared" : "Clear AI cache failed");
+    if (response.ok) {
       await loadQuestions();
     }
   }
@@ -217,6 +227,14 @@ export function AdminQuestionEditor() {
             Explanation
             <textarea value={selected.explanation ?? ""} onChange={(event) => setSelected({ ...selected, explanation: event.target.value })} />
           </label>
+          <section className="admin-cache-box">
+            <strong>AI cache: {selected.aiExplanation ? "saved" : "empty"}</strong>
+            {selected.aiExplanation && (
+              <button type="button" onClick={clearAiExplanation}>
+                Clear cached AI explanation
+              </button>
+            )}
+          </section>
           <label>
             Status
             <select value={selected.status} onChange={(event) => setSelected({ ...selected, status: event.target.value as AdminQuestion["status"] })}>

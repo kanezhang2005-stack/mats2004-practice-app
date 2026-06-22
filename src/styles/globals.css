@@ -224,6 +224,22 @@ button {
   gap: 6px;
 }
 
+.checkbox-row {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-cache-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px;
+}
+
 .admin-panel input,
 .admin-panel textarea,
 .admin-panel select {
@@ -235,6 +251,10 @@ button {
 
 .admin-panel textarea {
   min-height: 96px;
+}
+
+.admin-panel .checkbox-row input {
+  width: auto;
 }
 
 .button-row {

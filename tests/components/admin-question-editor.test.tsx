@@ -16,6 +16,7 @@ const numericQuestion = {
   tolerance: 0.01,
   unit: null,
   explanation: null,
+  aiExplanation: null,
   status: "verified" as const
 };
 
@@ -35,6 +36,11 @@ const singleChoiceQuestion = {
   options: ["Ultimate Stress", "End of Elastic Region", "Fracture Stress"],
   answer: "C",
   tolerance: null
+};
+
+const questionWithAiCache = {
+  ...numericQuestion,
+  aiExplanation: "Cached explanation"
 };
 
 describe("AdminQuestionEditor", () => {
@@ -172,5 +178,32 @@ describe("AdminQuestionEditor", () => {
 
     expect(await screen.findByLabelText(/answer/i)).toBeInTheDocument();
     expect(screen.queryByLabelText(/^options$/i)).not.toBeInTheDocument();
+  });
+
+  it("shows and clears cached AI explanations", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce({ ok: true })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ questions: [questionWithAiCache] })
+      })
+      .mockResolvedValueOnce({ ok: true })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ questions: [numericQuestion] })
+      });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const user = userEvent.setup();
+    render(<AdminQuestionEditor />);
+
+    await user.type(screen.getByLabelText(/admin password/i), "secret");
+    await user.click(screen.getByRole("button", { name: /enter/i }));
+
+    expect(await screen.findByText(/AI cache: saved/i)).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /clear cached ai explanation/i }));
+
+    expect(fetchMock).toHaveBeenNthCalledWith(3, "/api/admin/questions/q1/ai-explanation", { method: "DELETE" });
   });
 });

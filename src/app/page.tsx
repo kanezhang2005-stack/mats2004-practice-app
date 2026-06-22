@@ -1,4 +1,5 @@
 import { PracticeSession } from "@/components/PracticeSession";
+import { getAiExplanationsEnabled } from "@/lib/app-settings";
 import { listPublicQuestions } from "@/lib/questions";
 import { headers } from "next/headers";
 
@@ -31,6 +32,7 @@ function shuffle<T>(items: T[]) {
 export default async function Home({ searchParams }: { searchParams: Promise<{ source?: string }> }) {
   const params = await searchParams;
   const questions = shuffle(await listPublicQuestions(params.source));
+  const aiExplanationsEnabled = await getAiExplanationsEnabled();
 
   return (
     <main className="app-shell">
@@ -51,7 +53,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ s
         </form>
       </header>
       {questions.length ? (
-        <PracticeSession questions={questions} onCheck={checkAnswer} />
+        <PracticeSession questions={questions} onCheck={checkAnswer} aiExplanationsEnabled={aiExplanationsEnabled} />
       ) : (
         <p>No questions found.</p>
       )}

@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { checkAnswer, parseNumericSubmission, type QuestionType } from "@/lib/answers";
 import { createAiExplanation } from "@/lib/ai-explanation";
+import { getAiExplanationsEnabled } from "@/lib/app-settings";
 import { prisma } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { z } from "zod";
@@ -22,6 +23,7 @@ type ExplainQuestion = {
   answer: unknown;
   tolerance: number | null;
   unit: string | null;
+  aiExplanation?: string | null;
   status: "verified" | "needs_review";
 };
 
@@ -78,6 +80,10 @@ async function findQuestion(questionId: string): Promise<ExplainQuestion | null>
 }
 
 export async function POST(request: Request) {
+  if (!(await getAiExplanationsEnabled())) {
+    return NextResponse.json({ error: "AI explanations are currently disabled." }, { status: 403 });
+  }
+
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     return NextResponse.json({ error: "AI explanations are not configured." }, { status: 503 });
@@ -95,6 +101,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "AI explanation is only available after an incorrect answer." }, { status: 400 });
   }
 
+  if (question.aiExplanation) {
+    return NextResponse.json({ explanation: question.aiExplanation, cached: true });
+  }
+
   const explanation = await createAiExplanation({
     apiKey,
     model: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
@@ -104,5 +114,12 @@ export async function POST(request: Request) {
     correctAnswer: answerForResponse(question)
   });
 
-  return NextResponse.json({ explanation });
+  if (process.env.DATABASE_URL && question.id) {
+    await prisma.question.update({
+      where: { id: question.id },
+      data: { aiExplanation: explanation }
+    });
+  }
+
+  return NextResponse.json({ explanation, cached: false });
 }

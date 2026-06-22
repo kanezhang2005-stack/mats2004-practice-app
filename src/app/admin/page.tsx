@@ -1,3 +1,4 @@
+import { AdminAiSettings } from "@/components/AdminAiSettings";
 import { AdminQuestionEditor } from "@/components/AdminQuestionEditor";
 import { AdminStats } from "@/components/AdminStats";
 
@@ -10,6 +11,7 @@ export default function AdminPage() {
           <h1>MATS2004 Question Manager</h1>
         </div>
       </header>
+      <AdminAiSettings />
       <AdminQuestionEditor />
       <AdminStats />
     </main>

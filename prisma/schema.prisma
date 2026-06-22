@@ -31,6 +31,7 @@ model Question {
   tolerance      Float?
   unit           String?
   explanation    String?
+  aiExplanation  String?
   status         QuestionStatus @default(needs_review)
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
@@ -39,6 +40,12 @@ model Question {
   @@unique([source, questionNumber])
   @@index([source])
   @@index([status])
+}
+
+model AppSetting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
 }
 
 model Attempt {
