@@ -25,6 +25,10 @@ export function PracticeSession({
     setCurrentIndex((index) => (index + 1) % questions.length);
   }
 
+  function previousQuestion() {
+    setCurrentIndex((index) => (index - 1 + questions.length) % questions.length);
+  }
+
   if (!currentQuestion) {
     return <p>No questions found.</p>;
   }
@@ -40,6 +44,9 @@ export function PracticeSession({
             <option value="exam">Exam</option>
           </select>
         </label>
+        <button type="button" onClick={previousQuestion}>
+          Previous question
+        </button>
         <button type="button" onClick={nextQuestion}>
           Next question
         </button>

@@ -30,6 +30,7 @@ export function AdminQuestionEditor() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [questions, setQuestions] = useState<AdminQuestion[]>([]);
   const [selected, setSelected] = useState<AdminQuestion | null>(null);
+  const [toleranceText, setToleranceText] = useState("");
   const [message, setMessage] = useState("");
 
   async function login() {
@@ -48,15 +49,20 @@ export function AdminQuestionEditor() {
       const data = await response.json();
       setQuestions(data.questions);
       setSelected(data.questions[0] ?? null);
+      setToleranceText(data.questions[0]?.tolerance === null || data.questions[0]?.tolerance === undefined ? "" : String(data.questions[0].tolerance));
     }
   }
 
   async function saveQuestion() {
     if (!selected) return;
+    const questionToSave = {
+      ...selected,
+      tolerance: toleranceText.trim() ? Number(toleranceText) : null
+    };
     const response = await fetch(`/api/admin/questions/${selected.id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(selected)
+      body: JSON.stringify(questionToSave)
     });
     setMessage(response.ok ? "Saved" : "Save failed");
     if (response.ok) {
@@ -100,7 +106,14 @@ export function AdminQuestionEditor() {
     <section className="admin-grid">
       <aside className="admin-list">
         {questions.map((question) => (
-          <button key={question.id} type="button" onClick={() => setSelected(question)}>
+          <button
+            key={question.id}
+            type="button"
+            onClick={() => {
+              setSelected(question);
+              setToleranceText(question.tolerance === null || question.tolerance === undefined ? "" : String(question.tolerance));
+            }}
+          >
             {question.source} Q{question.questionNumber} · {question.status}
           </button>
         ))}
@@ -151,7 +164,7 @@ export function AdminQuestionEditor() {
           )}
           <label>
             Tolerance
-            <input value={selected.tolerance ?? ""} onChange={(event) => setSelected({ ...selected, tolerance: event.target.value ? Number(event.target.value) : null })} />
+            <input inputMode="decimal" value={toleranceText} onChange={(event) => setToleranceText(event.target.value)} />
           </label>
           <label>
             Unit

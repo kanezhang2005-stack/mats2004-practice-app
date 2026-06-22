@@ -44,6 +44,19 @@ describe("PracticeSession", () => {
     expect(screen.getByText("2 / 2")).toBeInTheDocument();
   });
 
+  it("moves back to the previous question", async () => {
+    const user = userEvent.setup();
+    render(<PracticeSession questions={questions} onCheck={vi.fn()} />);
+
+    await user.click(screen.getByRole("button", { name: /next question/i }));
+    expect(screen.getByText("Second question")).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /previous question/i }));
+
+    expect(screen.getByText("First question")).toBeInTheDocument();
+    expect(screen.getByText("1 / 2")).toBeInTheDocument();
+  });
+
   it("can hide the standard answer in exam mode", async () => {
     const user = userEvent.setup();
     render(

@@ -83,4 +83,29 @@ describe("AdminQuestionEditor", () => {
 
     expect(answerInput).toHaveValue("P/2");
   });
+
+  it("lets tolerance be edited as a decimal in progress", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockResolvedValueOnce({ ok: true })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ questions: [numericQuestion] })
+        })
+    );
+
+    const user = userEvent.setup();
+    render(<AdminQuestionEditor />);
+
+    await user.type(screen.getByLabelText(/admin password/i), "secret");
+    await user.click(screen.getByRole("button", { name: /enter/i }));
+
+    const toleranceInput = await screen.findByLabelText(/tolerance/i);
+    await user.clear(toleranceInput);
+    await user.type(toleranceInput, "0.");
+
+    expect(toleranceInput).toHaveValue("0.");
+  });
 });
