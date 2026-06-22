@@ -16,6 +16,7 @@ type ExplainQuestion = {
   source: string;
   questionNumber: number;
   prompt: string;
+  imageUrl: string;
   type: QuestionType;
   options: unknown;
   answer: unknown;
@@ -97,6 +98,7 @@ export async function POST(request: Request) {
   const explanation = await createAiExplanation({
     apiKey,
     model: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
+    appUrl: new URL(request.url).origin,
     question,
     submission: body.submission,
     correctAnswer: answerForResponse(question)

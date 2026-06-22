@@ -33,6 +33,23 @@ function displayPrompt(question: PracticeQuestionData) {
     .trim();
 }
 
+function formatAiExplanation(text: string) {
+  return text
+    .replace(/^\s*#{1,6}\s*/gm, "")
+    .replace(/\*\*(.*?)\*\*/g, "$1")
+    .replace(/\\\[/g, "")
+    .replace(/\\\]/g, "")
+    .replace(/\\\(/g, "")
+    .replace(/\\\)/g, "")
+    .replace(/\\times\b/g, "x")
+    .replace(/\\cdot\b/g, "·")
+    .replace(/\\text\{([^}]*)\}/g, "$1")
+    .replace(/\\frac\{([^}]*)\}\{([^}]*)\}/g, "($1)/($2)")
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 export function PracticeQuestion({
   question,
   onCheck,
@@ -162,7 +179,7 @@ export function PracticeQuestion({
         <div className="modal-backdrop" role="dialog" aria-modal="true" aria-label="AI Explanation">
           <section className="modal-panel">
             <h3>AI Explanation</h3>
-            <div className="ai-explanation">{aiExplanation}</div>
+            <div className="ai-explanation">{formatAiExplanation(aiExplanation)}</div>
             <button className="primary-button" type="button" onClick={() => setAiExplanation("")}>
               Close
             </button>

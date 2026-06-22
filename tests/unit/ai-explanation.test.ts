@@ -5,6 +5,7 @@ const question = {
   prompt: "What is the average normal stress?",
   type: "numeric" as const,
   options: [],
+  imageUrl: "/questions/tutorial-1-q01.png",
   unit: "MPa",
   status: "verified" as const
 };
@@ -18,6 +19,8 @@ describe("AI explanation helpers", () => {
     });
 
     expect(prompt).toContain("Do not ask follow-up questions");
+    expect(prompt).toContain("Do not use Markdown");
+    expect(prompt).toContain("Use plain text formulas");
     expect(prompt).toContain("Question prompt:\nWhat is the average normal stress?");
     expect(prompt).toContain("Student answer: 10");
     expect(prompt).toContain("Standard answer: 12");
@@ -62,5 +65,29 @@ describe("AI explanation helpers", () => {
         })
       })
     );
+  });
+
+  it("sends the question image as vision context when an app URL is available", async () => {
+    const fetcher = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ output_text: "Explanation from image" })
+    });
+
+    await createAiExplanation({
+      apiKey: "sk-test",
+      model: "gpt-4o-mini",
+      appUrl: "https://www.mats2004practice.com",
+      question,
+      submission: "10",
+      correctAnswer: 12,
+      fetcher: fetcher as unknown as typeof fetch
+    });
+
+    const body = JSON.parse(String(fetcher.mock.calls[0][1]?.body));
+    expect(body.input[0].content).toContainEqual({
+      type: "input_image",
+      image_url: "https://www.mats2004practice.com/questions/tutorial-1-q01.png",
+      detail: "high"
+    });
   });
 });

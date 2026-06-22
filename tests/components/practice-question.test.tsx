@@ -65,7 +65,7 @@ describe("PracticeQuestion", () => {
       "fetch",
       vi.fn().mockResolvedValue({
         ok: true,
-        json: async () => ({ explanation: "Use torque equilibrium to compare the segments." })
+        json: async () => ({ explanation: "### Step-by-step explanation\n**Use equilibrium**\n\\[\nM = P \\times L\n\\]" })
       })
     );
     const user = userEvent.setup();
@@ -81,7 +81,10 @@ describe("PracticeQuestion", () => {
     await user.click(await screen.findByRole("button", { name: /^explain$/i }));
 
     expect(await screen.findByRole("dialog", { name: /ai explanation/i })).toBeInTheDocument();
-    expect(screen.getByText(/use torque equilibrium/i)).toBeInTheDocument();
+    expect(screen.getByText(/Use equilibrium/i)).toBeInTheDocument();
+    expect(screen.getByText(/M = P x L/i)).toBeInTheDocument();
+    expect(screen.queryByText(/###/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/\\times/)).not.toBeInTheDocument();
     expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
   });
 
