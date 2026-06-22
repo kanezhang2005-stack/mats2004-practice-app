@@ -25,11 +25,27 @@ function parseJsonOrString(value: string) {
   }
 }
 
+function hasChoiceOptions(question: AdminQuestion) {
+  return question.type === "single_choice" || question.type === "multi_choice";
+}
+
+function optionLines(options: unknown) {
+  return Array.isArray(options) ? options.map(String).join("\n") : "";
+}
+
+function linesToOptions(value: string) {
+  return value
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+}
+
 export function AdminQuestionEditor() {
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [questions, setQuestions] = useState<AdminQuestion[]>([]);
   const [selected, setSelected] = useState<AdminQuestion | null>(null);
+  const [optionsText, setOptionsText] = useState("");
   const [toleranceText, setToleranceText] = useState("");
   const [message, setMessage] = useState("");
 
@@ -49,6 +65,7 @@ export function AdminQuestionEditor() {
       const data = await response.json();
       setQuestions(data.questions);
       setSelected(data.questions[0] ?? null);
+      setOptionsText(data.questions[0] ? optionLines(data.questions[0].options) : "");
       setToleranceText(data.questions[0]?.tolerance === null || data.questions[0]?.tolerance === undefined ? "" : String(data.questions[0].tolerance));
     }
   }
@@ -57,6 +74,7 @@ export function AdminQuestionEditor() {
     if (!selected) return;
     const questionToSave = {
       ...selected,
+      options: hasChoiceOptions(selected) ? linesToOptions(optionsText) : [],
       tolerance: toleranceText.trim() ? Number(toleranceText) : null
     };
     const response = await fetch(`/api/admin/questions/${selected.id}`, {
@@ -111,6 +129,7 @@ export function AdminQuestionEditor() {
             type="button"
             onClick={() => {
               setSelected(question);
+              setOptionsText(optionLines(question.options));
               setToleranceText(question.tolerance === null || question.tolerance === undefined ? "" : String(question.tolerance));
             }}
           >
@@ -136,17 +155,28 @@ export function AdminQuestionEditor() {
           </label>
           <label>
             Type
-            <select value={selected.type} onChange={(event) => setSelected({ ...selected, type: event.target.value as AdminQuestion["type"] })}>
+            <select
+              value={selected.type}
+              onChange={(event) => {
+                const nextType = event.target.value as AdminQuestion["type"];
+                setSelected({ ...selected, type: nextType });
+                if (nextType !== "single_choice" && nextType !== "multi_choice") {
+                  setOptionsText("");
+                }
+              }}
+            >
               <option value="single_choice">single_choice</option>
               <option value="multi_choice">multi_choice</option>
               <option value="numeric">numeric</option>
               <option value="text">text</option>
             </select>
           </label>
-          <label>
-            Options JSON
-            <textarea value={JSON.stringify(selected.options, null, 2)} onChange={(event) => setSelected({ ...selected, options: parseJsonOrString(event.target.value) })} />
-          </label>
+          {hasChoiceOptions(selected) && (
+            <label>
+              Options
+              <textarea value={optionsText} onChange={(event) => setOptionsText(event.target.value)} />
+            </label>
+          )}
           {selected.type === "numeric" || selected.type === "text" ? (
             <label>
               Answer
@@ -154,6 +184,19 @@ export function AdminQuestionEditor() {
                 inputMode="decimal"
                 value={selected.answer === null || selected.answer === undefined ? "" : String(selected.answer)}
                 onChange={(event) => setSelected({ ...selected, answer: event.target.value })}
+              />
+            </label>
+          ) : hasChoiceOptions(selected) ? (
+            <label>
+              Answer
+              <input
+                value={Array.isArray(selected.answer) ? selected.answer.join(",") : selected.answer === null || selected.answer === undefined ? "" : String(selected.answer)}
+                onChange={(event) =>
+                  setSelected({
+                    ...selected,
+                    answer: selected.type === "multi_choice" ? event.target.value.split(",").map((choice) => choice.trim()).filter(Boolean) : event.target.value
+                  })
+                }
               />
             </label>
           ) : (

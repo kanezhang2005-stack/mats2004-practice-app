@@ -27,6 +27,16 @@ const textQuestion = {
   answer: "2P"
 };
 
+const singleChoiceQuestion = {
+  ...numericQuestion,
+  id: "q3",
+  questionNumber: 4,
+  type: "single_choice" as const,
+  options: ["Ultimate Stress", "End of Elastic Region", "Fracture Stress"],
+  answer: "C",
+  tolerance: null
+};
+
 describe("AdminQuestionEditor", () => {
   afterEach(() => {
     vi.restoreAllMocks();
@@ -107,5 +117,60 @@ describe("AdminQuestionEditor", () => {
     await user.type(toleranceInput, "0.");
 
     expect(toleranceInput).toHaveValue("0.");
+  });
+
+  it("edits choice options as one option per line", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce({ ok: true })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ questions: [singleChoiceQuestion] })
+      })
+      .mockResolvedValueOnce({ ok: true })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ questions: [singleChoiceQuestion] })
+      });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const user = userEvent.setup();
+    render(<AdminQuestionEditor />);
+
+    await user.type(screen.getByLabelText(/admin password/i), "secret");
+    await user.click(screen.getByRole("button", { name: /enter/i }));
+
+    const optionsInput = await screen.findByLabelText(/^options$/i);
+    expect(optionsInput).toHaveValue("Ultimate Stress\nEnd of Elastic Region\nFracture Stress");
+
+    await user.clear(optionsInput);
+    await user.type(optionsInput, "A-B\nB-C\nC-D");
+    await user.click(screen.getByRole("button", { name: /^save$/i }));
+
+    expect(JSON.parse(fetchMock.mock.calls[2][1].body)).toMatchObject({
+      options: ["A-B", "B-C", "C-D"]
+    });
+  });
+
+  it("hides options for numeric and text questions", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockResolvedValueOnce({ ok: true })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ questions: [numericQuestion] })
+        })
+    );
+
+    const user = userEvent.setup();
+    render(<AdminQuestionEditor />);
+
+    await user.type(screen.getByLabelText(/admin password/i), "secret");
+    await user.click(screen.getByRole("button", { name: /enter/i }));
+
+    expect(await screen.findByLabelText(/answer/i)).toBeInTheDocument();
+    expect(screen.queryByLabelText(/^options$/i)).not.toBeInTheDocument();
   });
 });
