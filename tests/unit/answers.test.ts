@@ -37,6 +37,30 @@ describe("checkAnswer", () => {
     });
   });
 
+  it("accepts numeric answers written with scientific notation", () => {
+    expect(checkAnswer({ type: "numeric", answer: 1200000000 }, "1.2*10^9")).toEqual({
+      correct: true,
+      normalizedSubmission: 1200000000
+    });
+
+    expect(checkAnswer({ type: "numeric", answer: 1200000000 }, "1.2 x 10^9")).toEqual({
+      correct: true,
+      normalizedSubmission: 1200000000
+    });
+  });
+
+  it("accepts numeric answers written with metric suffixes", () => {
+    expect(checkAnswer({ type: "numeric", answer: 1200000000 }, "1200M")).toEqual({
+      correct: true,
+      normalizedSubmission: 1200000000
+    });
+
+    expect(checkAnswer({ type: "numeric", answer: 1200000000 }, "1.2G")).toEqual({
+      correct: true,
+      normalizedSubmission: 1200000000
+    });
+  });
+
   it("checks text answers by trimming and ignoring case", () => {
     expect(checkAnswer({ type: "text", answer: "A-B and C-D" }, " a-b AND c-d ")).toEqual({
       correct: true,
