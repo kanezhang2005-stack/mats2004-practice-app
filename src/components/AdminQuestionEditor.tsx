@@ -134,10 +134,21 @@ export function AdminQuestionEditor() {
             Options JSON
             <textarea value={JSON.stringify(selected.options, null, 2)} onChange={(event) => setSelected({ ...selected, options: parseJsonOrString(event.target.value) })} />
           </label>
-          <label>
-            Answer JSON
-            <textarea value={JSON.stringify(selected.answer, null, 2)} onChange={(event) => setSelected({ ...selected, answer: parseJsonOrString(event.target.value) })} />
-          </label>
+          {selected.type === "numeric" ? (
+            <label>
+              Answer
+              <input
+                inputMode="decimal"
+                value={selected.answer === null || selected.answer === undefined ? "" : String(selected.answer)}
+                onChange={(event) => setSelected({ ...selected, answer: event.target.value })}
+              />
+            </label>
+          ) : (
+            <label>
+              Answer JSON
+              <textarea value={JSON.stringify(selected.answer, null, 2)} onChange={(event) => setSelected({ ...selected, answer: parseJsonOrString(event.target.value) })} />
+            </label>
+          )}
           <label>
             Tolerance
             <input value={selected.tolerance ?? ""} onChange={(event) => setSelected({ ...selected, tolerance: event.target.value ? Number(event.target.value) : null })} />
