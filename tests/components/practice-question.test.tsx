@@ -38,4 +38,20 @@ describe("PracticeQuestion", () => {
     expect(await screen.findByText(/^Correct$/i)).toBeInTheDocument();
     expect(screen.getByText(/standard answer/i)).toBeInTheDocument();
   });
+
+  it("does not duplicate choice options embedded in the prompt", () => {
+    render(
+      <PracticeQuestion
+        question={{
+          ...question,
+          prompt: "What is represented by point A?\nA. Ultimate Stress\nB. End of Elastic Region\nC. Fracture Stress"
+        }}
+        onCheck={vi.fn()}
+      />
+    );
+
+    expect(screen.getByRole("heading", { name: "What is represented by point A?" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /ultimate stress/i })).not.toBeInTheDocument();
+    expect(screen.getByRole("radio", { name: /A\. Axial loading/i })).toBeInTheDocument();
+  });
 });

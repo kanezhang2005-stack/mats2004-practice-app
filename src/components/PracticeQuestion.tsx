@@ -21,6 +21,18 @@ type CheckResponse = {
   status: "verified" | "needs_review";
 };
 
+function displayPrompt(question: PracticeQuestionData) {
+  if (question.type !== "single_choice" && question.type !== "multi_choice") {
+    return question.prompt;
+  }
+
+  return question.prompt
+    .split(/\r?\n/)
+    .filter((line) => !/^[A-Z]\.\s+/.test(line.trim()))
+    .join("\n")
+    .trim();
+}
+
 export function PracticeQuestion({
   question,
   onCheck,
@@ -61,7 +73,7 @@ export function PracticeQuestion({
       <div className="question-meta">
         {question.source.replace("_", " ")} · Q{question.questionNumber}
       </div>
-      <h2>{question.prompt}</h2>
+      <h2>{displayPrompt(question)}</h2>
       <img className="question-image" src={question.imageUrl} alt={`Question ${question.questionNumber}`} />
 
       <div className="answer-area">
