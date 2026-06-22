@@ -42,23 +42,11 @@ function linesToOptions(value: string) {
 }
 
 export function AdminQuestionEditor() {
-  const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
   const [questions, setQuestions] = useState<AdminQuestion[]>([]);
   const [selected, setSelected] = useState<AdminQuestion | null>(null);
   const [optionsText, setOptionsText] = useState("");
   const [toleranceText, setToleranceText] = useState("");
   const [message, setMessage] = useState("");
-
-  async function login() {
-    const response = await fetch("/api/admin/login", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ password })
-    });
-    setLoggedIn(response.ok);
-    setMessage(response.ok ? "" : "Invalid password");
-  }
 
   async function loadQuestions() {
     const response = await fetch("/api/admin/questions");
@@ -109,26 +97,8 @@ export function AdminQuestionEditor() {
   }
 
   useEffect(() => {
-    if (loggedIn) void loadQuestions();
-  }, [loggedIn]);
-
-  if (!loggedIn) {
-    return (
-      <section className="admin-panel">
-        <h2>Admin login</h2>
-        <input
-          aria-label="Admin password"
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        <button className="primary-button" type="button" onClick={login}>
-          Enter
-        </button>
-        {message && <p>{message}</p>}
-      </section>
-    );
-  }
+    void loadQuestions();
+  }, []);
 
   return (
     <section className="admin-grid">

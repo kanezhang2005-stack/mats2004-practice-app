@@ -53,7 +53,6 @@ describe("AdminQuestionEditor", () => {
       "fetch",
       vi
         .fn()
-        .mockResolvedValueOnce({ ok: true })
         .mockResolvedValueOnce({
           ok: true,
           json: async () => ({ questions: [numericQuestion] })
@@ -62,10 +61,6 @@ describe("AdminQuestionEditor", () => {
 
     const user = userEvent.setup();
     render(<AdminQuestionEditor />);
-
-    await user.type(screen.getByLabelText(/admin password/i), "secret");
-    await user.click(screen.getByRole("button", { name: /enter/i }));
-
     const answerInput = await screen.findByLabelText(/answer/i);
     await user.clear(answerInput);
     await user.type(answerInput, "222.");
@@ -78,7 +73,6 @@ describe("AdminQuestionEditor", () => {
       "fetch",
       vi
         .fn()
-        .mockResolvedValueOnce({ ok: true })
         .mockResolvedValueOnce({
           ok: true,
           json: async () => ({ questions: [textQuestion] })
@@ -87,10 +81,6 @@ describe("AdminQuestionEditor", () => {
 
     const user = userEvent.setup();
     render(<AdminQuestionEditor />);
-
-    await user.type(screen.getByLabelText(/admin password/i), "secret");
-    await user.click(screen.getByRole("button", { name: /enter/i }));
-
     const answerInput = await screen.findByLabelText(/answer/i);
     expect(answerInput).toHaveValue("2P");
 
@@ -105,7 +95,6 @@ describe("AdminQuestionEditor", () => {
       "fetch",
       vi
         .fn()
-        .mockResolvedValueOnce({ ok: true })
         .mockResolvedValueOnce({
           ok: true,
           json: async () => ({ questions: [numericQuestion] })
@@ -114,10 +103,6 @@ describe("AdminQuestionEditor", () => {
 
     const user = userEvent.setup();
     render(<AdminQuestionEditor />);
-
-    await user.type(screen.getByLabelText(/admin password/i), "secret");
-    await user.click(screen.getByRole("button", { name: /enter/i }));
-
     const toleranceInput = await screen.findByLabelText(/tolerance/i);
     await user.clear(toleranceInput);
     await user.type(toleranceInput, "0.");
@@ -128,7 +113,6 @@ describe("AdminQuestionEditor", () => {
   it("edits choice options as one option per line", async () => {
     const fetchMock = vi
       .fn()
-      .mockResolvedValueOnce({ ok: true })
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ questions: [singleChoiceQuestion] })
@@ -142,10 +126,6 @@ describe("AdminQuestionEditor", () => {
 
     const user = userEvent.setup();
     render(<AdminQuestionEditor />);
-
-    await user.type(screen.getByLabelText(/admin password/i), "secret");
-    await user.click(screen.getByRole("button", { name: /enter/i }));
-
     const optionsInput = await screen.findByLabelText(/^options$/i);
     expect(optionsInput).toHaveValue("Ultimate Stress\nEnd of Elastic Region\nFracture Stress");
 
@@ -153,7 +133,7 @@ describe("AdminQuestionEditor", () => {
     await user.type(optionsInput, "A-B\nB-C\nC-D");
     await user.click(screen.getByRole("button", { name: /^save$/i }));
 
-    expect(JSON.parse(fetchMock.mock.calls[2][1].body)).toMatchObject({
+    expect(JSON.parse(fetchMock.mock.calls[1][1].body)).toMatchObject({
       options: ["A-B", "B-C", "C-D"]
     });
   });
@@ -163,7 +143,6 @@ describe("AdminQuestionEditor", () => {
       "fetch",
       vi
         .fn()
-        .mockResolvedValueOnce({ ok: true })
         .mockResolvedValueOnce({
           ok: true,
           json: async () => ({ questions: [numericQuestion] })
@@ -172,10 +151,6 @@ describe("AdminQuestionEditor", () => {
 
     const user = userEvent.setup();
     render(<AdminQuestionEditor />);
-
-    await user.type(screen.getByLabelText(/admin password/i), "secret");
-    await user.click(screen.getByRole("button", { name: /enter/i }));
-
     expect(await screen.findByLabelText(/answer/i)).toBeInTheDocument();
     expect(screen.queryByLabelText(/^options$/i)).not.toBeInTheDocument();
   });
@@ -183,7 +158,6 @@ describe("AdminQuestionEditor", () => {
   it("shows and clears cached AI explanations", async () => {
     const fetchMock = vi
       .fn()
-      .mockResolvedValueOnce({ ok: true })
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ questions: [questionWithAiCache] })
@@ -197,13 +171,9 @@ describe("AdminQuestionEditor", () => {
 
     const user = userEvent.setup();
     render(<AdminQuestionEditor />);
-
-    await user.type(screen.getByLabelText(/admin password/i), "secret");
-    await user.click(screen.getByRole("button", { name: /enter/i }));
-
     expect(await screen.findByText(/AI cache: saved/i)).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: /clear cached ai explanation/i }));
 
-    expect(fetchMock).toHaveBeenNthCalledWith(3, "/api/admin/questions/q1/ai-explanation", { method: "DELETE" });
+    expect(fetchMock).toHaveBeenNthCalledWith(2, "/api/admin/questions/q1/ai-explanation", { method: "DELETE" });
   });
 });
