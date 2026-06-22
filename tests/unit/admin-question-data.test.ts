@@ -57,4 +57,20 @@ describe("buildQuestionUpdateData", () => {
       status: "needs_review"
     });
   });
+
+  it("normalizes numeric answers before saving", () => {
+    expect(
+      buildQuestionUpdateData({
+        prompt: "Numeric question",
+        imageUrl: "/questions/tutorial-1-q02.png",
+        type: "numeric",
+        options: [],
+        answer: "1.2k",
+        tolerance: 0.01,
+        unit: null,
+        explanation: null,
+        status: "verified"
+      }).answer
+    ).toBe(1200);
+  });
 });

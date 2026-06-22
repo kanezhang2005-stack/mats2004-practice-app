@@ -25,7 +25,7 @@ function asString(value: Submission): string {
   return Array.isArray(value) ? value.join(",") : String(value);
 }
 
-function parseNumericSubmission(value: Submission): number {
+export function parseNumericSubmission(value: Submission): number {
   if (typeof value === "number") {
     return value;
   }

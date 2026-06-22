@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { checkAnswer, type QuestionType } from "@/lib/answers";
+import { checkAnswer, parseNumericSubmission, type QuestionType } from "@/lib/answers";
 import { prisma } from "@/lib/db";
 import { recordAttempt } from "@/lib/stats";
 import { NextResponse } from "next/server";
@@ -38,11 +38,20 @@ function toAnswerKey(question: {
   if (question.type === "numeric") {
     return {
       type: question.type,
-      answer: Number(question.answer),
+      answer: parseNumericSubmission(question.answer as string | string[] | number),
       tolerance: question.tolerance ?? undefined
     };
   }
   return { type: question.type, answer: String(question.answer ?? "") };
+}
+
+function answerForResponse(question: {
+  type: QuestionType;
+  answer: unknown;
+  tolerance: number | null;
+}) {
+  const answerKey = toAnswerKey(question);
+  return answerKey.type === "numeric" && Number.isFinite(answerKey.answer) ? answerKey.answer : question.answer;
 }
 
 async function findSeedQuestion(questionId: string) {
@@ -65,10 +74,11 @@ export async function POST(request: Request) {
       });
     }
 
-    const result = checkAnswer(toAnswerKey(question), body.submission);
+    const answerKey = toAnswerKey(question);
+    const result = checkAnswer(answerKey, body.submission);
     return NextResponse.json({
       correct: result.correct,
-      answer: question.answer,
+      answer: answerForResponse(question),
       explanation: question.explanation,
       status: question.status
     });
@@ -87,13 +97,14 @@ export async function POST(request: Request) {
     });
   }
 
-  const result = checkAnswer(toAnswerKey(question), body.submission);
+  const answerKey = toAnswerKey(question);
+  const result = checkAnswer(answerKey, body.submission);
 
   await recordAttempt(question.id, result.correct);
 
   return NextResponse.json({
     correct: result.correct,
-    answer: question.answer,
+    answer: answerForResponse(question),
     explanation: question.explanation,
     status: question.status
   });
